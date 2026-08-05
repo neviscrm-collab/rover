@@ -1,0 +1,35 @@
+[
+  {
+    "id": "pay_001",
+    "bookingId": "bkg_001",
+    "agencyId": "agc_001",
+    "amount": 45000,
+    "currency": "INR",
+    "status": "completed",
+    "method": "upi",
+    "transactionId": "TXN20240710142200001",
+    "createdAt": "2024-07-10T14:22:00Z"
+  },
+  {
+    "id": "pay_002",
+    "bookingId": "bkg_002",
+    "agencyId": "agc_001",
+    "amount": 28000,
+    "currency": "INR",
+    "status": "pending",
+    "method": "card",
+    "transactionId": "",
+    "createdAt": "2024-07-20T09:15:00Z"
+  },
+  {
+    "id": "pay_003",
+    "bookingId": "bkg_003",
+    "agencyId": "agc_001",
+    "amount": 35000,
+    "currency": "INR",
+    "status": "completed",
+    "method": "net_banking",
+    "transactionId": "TXN20240502110000002",
+    "createdAt": "2024-05-02T11:00:00Z"
+  }
+]

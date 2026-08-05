@@ -1,0 +1,182 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { EnvelopeSimple, Lock, Eye, EyeSlash, GoogleLogo, ArrowLeft, WarningCircle } from "@phosphor-icons/react";
+import { useAuthStore } from "@/store/auth.store";
+import { UserRole } from "@/lib/types/auth.types";
+
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPw, setShowPw] = useState(false);
+  const [error, setError] = useState("");
+  const { login, loginWithGoogle, loading } = useAuthStore();
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await login(email, password);
+      const { role } = useAuthStore.getState();
+      router.replace(role === UserRole.AGENCY ? "/studio" : "/app");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Login failed.");
+    }
+  };
+
+  const handleGoogle = async () => {
+    setError("");
+    try {
+      await loginWithGoogle();
+      const { role } = useAuthStore.getState();
+      router.replace(role === UserRole.AGENCY ? "/studio" : "/app");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Google login failed.");
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-5 py-12">
+      {/* Back */}
+      <Link href="/" className="absolute top-6 left-5 flex items-center gap-2 text-sm" style={{ color: "var(--text-dim)" }}>
+        <ArrowLeft size={16} />
+        Back to ROVER
+      </Link>
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="w-full max-w-sm"
+      >
+        {/* Logo */}
+        <div className="flex items-center justify-center gap-2.5 mb-8">
+          <div
+            className="w-10 h-10 rounded-2xl flex items-center justify-center text-base font-bold text-white"
+            style={{ background: "linear-gradient(135deg, #7C3AED, #06B6D4)" }}
+          >
+            R
+          </div>
+          <span className="text-xl font-bold" style={{ color: "var(--text)" }}>ROVER</span>
+        </div>
+
+        <h1 className="text-2xl font-bold text-center mb-1" style={{ color: "var(--text)" }}>
+          Welcome back
+        </h1>
+        <p className="text-sm text-center mb-8" style={{ color: "var(--text-dim)" }}>
+          Sign in to continue your journey
+        </p>
+
+        {/* Google */}
+        <motion.button
+          whileTap={{ scale: 0.97 }}
+          onClick={handleGoogle}
+          disabled={loading}
+          className="w-full flex items-center justify-center gap-3 py-3 rounded-2xl mb-5 font-medium text-sm transition-all"
+          style={{
+            background: "rgba(255,255,255,0.07)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            color: "var(--text)",
+          }}
+        >
+          <GoogleLogo size={18} weight="bold" />
+          Continue with Google
+        </motion.button>
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
+          <span className="text-xs" style={{ color: "var(--text-faint)" }}>or</span>
+          <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleLogin} className="space-y-4">
+          {/* Email */}
+          <div
+            className="flex items-center gap-3 px-4 py-3 rounded-2xl"
+            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+          >
+            <EnvelopeSimple size={18} style={{ color: "var(--text-faint)" }} />
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="flex-1 bg-transparent text-sm outline-none"
+              style={{ color: "var(--text)" }}
+            />
+          </div>
+
+          {/* Password */}
+          <div
+            className="flex items-center gap-3 px-4 py-3 rounded-2xl"
+            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+          >
+            <Lock size={18} style={{ color: "var(--text-faint)" }} />
+            <input
+              type={showPw ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="flex-1 bg-transparent text-sm outline-none"
+              style={{ color: "var(--text)" }}
+            />
+            <button type="button" onClick={() => setShowPw(!showPw)} style={{ color: "var(--text-faint)" }}>
+              {showPw ? <EyeSlash size={16} /> : <Eye size={16} />}
+            </button>
+          </div>
+
+          <div className="flex justify-end">
+            <Link href="/forgot-password" className="text-xs" style={{ color: "#7C3AED" }}>
+              Forgot password?
+            </Link>
+          </div>
+
+          {error && (
+            <div className="flex items-center gap-2 p-3 rounded-xl" style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.2)" }}>
+              <WarningCircle size={16} className="text-red-400 flex-shrink-0" />
+              <p className="text-xs text-red-400">{error}</p>
+            </div>
+          )}
+
+          <motion.button
+            whileTap={{ scale: 0.97 }}
+            type="submit"
+            disabled={loading}
+            className="w-full py-3.5 rounded-2xl font-semibold text-sm text-white transition-all"
+            style={{
+              background: loading ? "rgba(124,58,237,0.4)" : "linear-gradient(135deg, #7C3AED, #6D28D9)",
+              boxShadow: loading ? "none" : "0 4px 24px rgba(124,58,237,0.35)",
+            }}
+          >
+            {loading ? "Signing in…" : "Sign in"}
+          </motion.button>
+        </form>
+
+        <p className="text-center text-sm mt-6" style={{ color: "var(--text-faint)" }}>
+          Don't have an account?{" "}
+          <Link href="/register" style={{ color: "#7C3AED" }} className="font-medium">
+            Create one
+          </Link>
+        </p>
+
+        {/* Demo hint */}
+        <div className="mt-6 p-3 rounded-xl text-center" style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.15)" }}>
+          <p className="text-xs" style={{ color: "var(--text-faint)" }}>
+            Demo traveler: <span className="text-violet-400">arjun@example.com</span> / <span className="text-violet-400">password123</span>
+          </p>
+          <p className="text-xs mt-1" style={{ color: "var(--text-faint)" }}>
+            Demo agency: <span className="text-violet-400">hello@wanderlust.com</span> / <span className="text-violet-400">agency123</span>
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}

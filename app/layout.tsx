@@ -2,10 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/layout/providers";
-import BottomDock from "@/components/layout/bottom-dock";
-import SideRail from "@/components/layout/side-rail";
-import AIOrb from "@/components/shared/ai-orb";
-import BookingSheet from "@/components/booking/booking-sheet";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -53,22 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className="min-h-full"
         style={{ background: "var(--bg)", color: "var(--text)" }}
       >
-        <Providers>
-          {/* Desktop side navigation */}
-          <SideRail />
-
-          {/* Main content */}
-          <main>{children}</main>
-
-          {/* Mobile bottom dock */}
-          <BottomDock />
-
-          {/* Floating AI assistant */}
-          <AIOrb />
-
-          {/* Global booking sheet */}
-          <BookingSheet />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

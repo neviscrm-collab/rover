@@ -1,0 +1,53 @@
+[
+  {
+    "id": "agc_001",
+    "userId": "usr_003",
+    "agencyName": "WanderLust Expeditions",
+    "logo": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=200&h=200&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&h=400&fit=crop",
+    "description": "Crafting transformative journeys for restless souls since 2018. We specialize in off-beat, experiential travel across South Asia and Southeast Asia.",
+    "gstNumber": "27AABCU9603R1ZX",
+    "country": "India",
+    "city": "Bengaluru",
+    "address": "42, Indiranagar 100ft Road, Bengaluru, Karnataka 560038",
+    "verificationStatus": "verified",
+    "socialLinks": {
+      "website": "https://wanderlust.example.com",
+      "instagram": "@wanderlust.expeditions",
+      "youtube": "WanderLustExp"
+    },
+    "supportContact": "+91 98765 43210",
+    "businessHours": "Mon–Sat, 9 AM–7 PM IST",
+    "yearsOfExperience": 6,
+    "languages": ["English", "Hindi", "Kannada"],
+    "rating": 4.8,
+    "totalTrips": 312,
+    "followers": 18400,
+    "createdAt": "2023-11-01T09:00:00Z"
+  },
+  {
+    "id": "agc_002",
+    "userId": "usr_004",
+    "agencyName": "Summit Seekers",
+    "logo": "https://images.unsplash.com/photo-1551632811-561732d1e306?w=200&h=200&fit=crop",
+    "banner": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=400&fit=crop",
+    "description": "India's premier trekking company. From Himalayan peaks to coastal treks, we take you where roads end and stories begin.",
+    "gstNumber": "07AAHCS1234B1ZC",
+    "country": "India",
+    "city": "Delhi",
+    "address": "Block C, Connaught Place, New Delhi 110001",
+    "verificationStatus": "verified",
+    "socialLinks": {
+      "website": "https://summitseekers.example.in",
+      "instagram": "@summit_seekers"
+    },
+    "supportContact": "+91 91234 56789",
+    "businessHours": "Mon–Sun, 8 AM–8 PM IST",
+    "yearsOfExperience": 4,
+    "languages": ["English", "Hindi"],
+    "rating": 4.6,
+    "totalTrips": 187,
+    "followers": 9200,
+    "createdAt": "2024-01-05T11:00:00Z"
+  }
+]

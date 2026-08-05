@@ -1,0 +1,53 @@
+[
+  {
+    "id": "bkg_001",
+    "experienceId": "exp_spiti",
+    "experienceTitle": "Spiti Valley Motorbike Expedition",
+    "agencyId": "agc_001",
+    "travelerId": "usr_001",
+    "travelerName": "Arjun Mehta",
+    "travelerAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
+    "travelerEmail": "arjun@example.com",
+    "status": "confirmed",
+    "amount": 45000,
+    "paidAt": "2024-07-10T14:22:00Z",
+    "startDate": "2024-09-01",
+    "participants": 1,
+    "notes": "Vegetarian meals required. Window seat on buses.",
+    "createdAt": "2024-07-08T10:00:00Z"
+  },
+  {
+    "id": "bkg_002",
+    "experienceId": "exp_kerala",
+    "experienceTitle": "Kerala Backwaters Houseboat Retreat",
+    "agencyId": "agc_001",
+    "travelerId": "usr_002",
+    "travelerName": "Priya Sharma",
+    "travelerAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop",
+    "travelerEmail": "priya@example.com",
+    "status": "pending",
+    "amount": 28000,
+    "paidAt": null,
+    "startDate": "2024-10-15",
+    "participants": 2,
+    "notes": "",
+    "createdAt": "2024-07-20T09:15:00Z"
+  },
+  {
+    "id": "bkg_003",
+    "experienceId": "exp_ladakh",
+    "experienceTitle": "Ladakh Road Trip — Pangong & Nubra",
+    "agencyId": "agc_001",
+    "travelerId": "usr_001",
+    "travelerName": "Arjun Mehta",
+    "travelerAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
+    "travelerEmail": "arjun@example.com",
+    "status": "completed",
+    "amount": 35000,
+    "paidAt": "2024-05-02T11:00:00Z",
+    "startDate": "2024-06-10",
+    "participants": 1,
+    "notes": "Solo traveler, joined a group.",
+    "createdAt": "2024-04-28T08:00:00Z"
+  }
+]

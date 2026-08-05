@@ -1,0 +1,32 @@
+[
+  {
+    "id": "doc_001",
+    "agencyId": "agc_001",
+    "bookingId": "bkg_001",
+    "name": "Spiti Valley Itinerary — Sept 2024.pdf",
+    "type": "itinerary",
+    "url": "/mock-files/spiti-itinerary.pdf",
+    "size": 204800,
+    "uploadedAt": "2024-07-11T09:00:00Z"
+  },
+  {
+    "id": "doc_002",
+    "agencyId": "agc_001",
+    "bookingId": "bkg_001",
+    "name": "Invoice #INV-2024-001.pdf",
+    "type": "invoice",
+    "url": "/mock-files/invoice-001.pdf",
+    "size": 102400,
+    "uploadedAt": "2024-07-10T14:30:00Z"
+  },
+  {
+    "id": "doc_003",
+    "agencyId": "agc_001",
+    "bookingId": "bkg_003",
+    "name": "Ladakh Travel Insurance.pdf",
+    "type": "insurance",
+    "url": "/mock-files/ladakh-insurance.pdf",
+    "size": 153600,
+    "uploadedAt": "2024-05-03T10:00:00Z"
+  }
+]

@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -35,9 +35,9 @@ import {
 export default function ExperiencePage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = use(params);
+  const { id } = params;
   const experience = EXPERIENCES.find((e) => e.id === id);
 
   const { toggleWishlist, isWishlisted, setSelectedExperience, setBookingOpen } =

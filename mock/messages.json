@@ -1,0 +1,59 @@
+{
+  "conversations": [
+    {
+      "id": "conv_001",
+      "agencyId": "agc_001",
+      "travelerId": "usr_001",
+      "travelerName": "Arjun Mehta",
+      "travelerAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
+      "lastMessage": "Thanks! Looking forward to the trip 🏔️",
+      "lastMessageAt": "2024-07-21T16:45:00Z",
+      "unreadCount": 0
+    },
+    {
+      "id": "conv_002",
+      "agencyId": "agc_001",
+      "travelerId": "usr_002",
+      "travelerName": "Priya Sharma",
+      "travelerAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop",
+      "lastMessage": "Can we get an early check-in on the houseboat?",
+      "lastMessageAt": "2024-07-22T10:12:00Z",
+      "unreadCount": 2
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg_001",
+      "conversationId": "conv_001",
+      "senderId": "usr_001",
+      "senderName": "Arjun Mehta",
+      "senderAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
+      "content": "Hi! Is there gear rental available for the Spiti trip?",
+      "type": "text",
+      "readAt": "2024-07-21T14:02:00Z",
+      "createdAt": "2024-07-21T14:00:00Z"
+    },
+    {
+      "id": "msg_002",
+      "conversationId": "conv_001",
+      "senderId": "usr_003",
+      "senderName": "WanderLust Expeditions",
+      "senderAvatar": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=200&h=200&fit=crop",
+      "content": "Yes! We provide helmets, riding gear and rain covers. Just let us know your size.",
+      "type": "text",
+      "readAt": "2024-07-21T16:44:00Z",
+      "createdAt": "2024-07-21T14:05:00Z"
+    },
+    {
+      "id": "msg_003",
+      "conversationId": "conv_001",
+      "senderId": "usr_001",
+      "senderName": "Arjun Mehta",
+      "senderAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
+      "content": "Thanks! Looking forward to the trip 🏔️",
+      "type": "text",
+      "readAt": "2024-07-21T16:46:00Z",
+      "createdAt": "2024-07-21T16:45:00Z"
+    }
+  ]
+}

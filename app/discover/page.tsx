@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { SlidersHorizontal, X, Sparkle } from "@phosphor-icons/react";
+import { SlidersHorizontal, Sparkle } from "@phosphor-icons/react";
 import ExperienceCard from "@/components/shared/experience-card";
 import FloatingSearch from "@/components/shared/floating-search";
 import EmptyState from "@/components/shared/empty-state";
@@ -35,7 +35,7 @@ const SORT_OPTIONS = [
   { id: "rating", label: "Top Rated" },
 ];
 
-export default function DiscoverPage() {
+function DiscoverContent() {
   const searchParams = useSearchParams();
   const initialQ = searchParams.get("q") ?? "";
   const initialCat = searchParams.get("category") ?? "";
@@ -324,5 +324,19 @@ export default function DiscoverPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function DiscoverPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="page-mobile min-h-screen flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full border-2 border-violet-500 border-t-transparent animate-spin" />
+        </div>
+      }
+    >
+      <DiscoverContent />
+    </Suspense>
   );
 }

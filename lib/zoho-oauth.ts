@@ -41,13 +41,13 @@ export async function generatePKCE(): Promise<{ verifier: string; challenge: str
 // ─── Build the authorization URL ─────────────────────────────────────────────
 
 export function getZohoAuthUrl(codeChallenge?: string): string {
+  // Note: access_type=offline and prompt=consent are NOT supported for
+  // "Client-based Applications" in Zoho — omitting them avoids "Invalid Client".
   const params = new URLSearchParams({
     response_type: "code",
     client_id:     process.env.ZOHO_CLIENT_ID!,
     scope:         ZOHO_SCOPE,
     redirect_uri:  process.env.ZOHO_REDIRECT_URI!,
-    access_type:   "offline",
-    prompt:        "consent",
   });
 
   if (codeChallenge) {

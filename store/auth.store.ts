@@ -32,6 +32,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       loading: false,
       token: null,
       refreshToken: null,
+      tokenExpiry: null,
       _hydrated: false,
 
       // ── Actions ────────────────────────────────────────────────────────────
@@ -106,6 +107,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
           isAuthenticated: false,
           token: null,
           refreshToken: null,
+          tokenExpiry: null,
         });
       },
 
@@ -127,6 +129,20 @@ export const useAuthStore = create<AuthState & AuthActions>()(
 
       initialize: async () => {
         set({ loading: true });
+
+        // ── Check Zoho token expiry on every app load ──────────────────────
+        const { token, tokenExpiry } = get();
+        if (token && tokenExpiry && Date.now() > tokenExpiry) {
+          // Token expired — clear session silently
+          await AuthService.logout();
+          set({
+            user: null, role: null, isAuthenticated: false,
+            token: null, refreshToken: null, tokenExpiry: null,
+            loading: false,
+          });
+          return;
+        }
+
         const user = await AuthService.getCurrentUser();
         if (user) {
           set({
@@ -145,13 +161,23 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       name: "rover_auth",
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
-        user: state.user,
-        role: state.role,
+        user:            state.user,
+        role:            state.role,
         isAuthenticated: state.isAuthenticated,
-        token: state.token,
-        refreshToken: state.refreshToken,
+        token:           state.token,
+        refreshToken:    state.refreshToken,
+        tokenExpiry:     state.tokenExpiry,
       }),
       onRehydrateStorage: () => (state) => {
+        if (state?.tokenExpiry && Date.now() > state.tokenExpiry) {
+          // Token already expired at boot — wipe auth before UI renders
+          state.user            = null;
+          state.role            = null;
+          state.isAuthenticated = false;
+          state.token           = null;
+          state.refreshToken    = null;
+          state.tokenExpiry     = null;
+        }
         state?.setHydrated();
       },
     }

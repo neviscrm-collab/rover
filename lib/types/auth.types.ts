@@ -91,5 +91,6 @@ export interface AuthState {
   loading: boolean;
   token: string | null;
   refreshToken: string | null;
+  tokenExpiry: number | null;  // ms timestamp — null = no expiry (mock/Google auth)
   _hydrated: boolean;
 }

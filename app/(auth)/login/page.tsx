@@ -167,14 +167,42 @@ export default function LoginPage() {
           </Link>
         </p>
 
-        {/* Demo hint */}
-        <div className="mt-6 p-3 rounded-xl text-center" style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.15)" }}>
-          <p className="text-xs" style={{ color: "var(--text-faint)" }}>
-            Demo traveler: <span className="text-violet-400">arjun@example.com</span> / <span className="text-violet-400">password123</span>
-          </p>
-          <p className="text-xs mt-1" style={{ color: "var(--text-faint)" }}>
-            Demo agency: <span className="text-violet-400">hello@wanderlust.com</span> / <span className="text-violet-400">agency123</span>
-          </p>
+        {/* Demo quick-login buttons */}
+        <div className="mt-6" style={{ border: "1px solid rgba(124,58,237,0.2)", borderRadius: 16, overflow: "hidden" }}>
+          <div
+            className="flex items-center gap-2 px-3 py-2"
+            style={{ background: "rgba(124,58,237,0.1)", borderBottom: "1px solid rgba(124,58,237,0.15)" }}
+          >
+            <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#7C3AED" }}>
+              🧪 Demo accounts — tap to fill
+            </span>
+          </div>
+          <div className="divide-y" style={{ divideColor: "rgba(255,255,255,0.05)" }}>
+            {[
+              { label: "Traveler", emoji: "🎒", email: "arjun@example.com", password: "password123" },
+              { label: "Agency", emoji: "🏢", email: "hello@wanderlust.com", password: "agency123" },
+            ].map(({ label, emoji, email: demoEmail, password: demoPw }) => (
+              <motion.button
+                key={label}
+                type="button"
+                whileTap={{ scale: 0.98 }}
+                onClick={() => { setEmail(demoEmail); setPassword(demoPw); setError(""); }}
+                className="w-full flex items-center justify-between px-3 py-2.5 text-left transition-all"
+                style={{ background: "rgba(255,255,255,0.02)" }}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-base">{emoji}</span>
+                  <div>
+                    <p className="text-xs font-semibold" style={{ color: "var(--text)" }}>{label}</p>
+                    <p className="text-[10px]" style={{ color: "var(--text-faint)" }}>{demoEmail}</p>
+                  </div>
+                </div>
+                <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: "rgba(124,58,237,0.15)", color: "#7C3AED" }}>
+                  Fill
+                </span>
+              </motion.button>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>

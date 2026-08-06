@@ -13,7 +13,7 @@ interface AuthGuardProps {
  * Wrap any private route layout with this.
  */
 export default function AuthGuard({ children }: AuthGuardProps) {
-  const { isAuthenticated, loading, initialize } = useAuthStore();
+  const { isAuthenticated, loading, initialize, _hydrated } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -21,12 +21,14 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   }, [initialize]);
 
   useEffect(() => {
-    if (!loading && !isAuthenticated) {
+    // Only redirect after hydration — prevents false /login redirects on first render
+    if (!_hydrated || loading) return;
+    if (!isAuthenticated) {
       router.replace("/login");
     }
-  }, [isAuthenticated, loading, router]);
+  }, [_hydrated, isAuthenticated, loading, router]);
 
-  if (loading || !isAuthenticated) {
+  if (!_hydrated || loading || !isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--bg)" }}>
         <div className="flex flex-col items-center gap-4">

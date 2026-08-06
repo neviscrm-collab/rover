@@ -17,6 +17,7 @@ interface AuthActions {
   setUser: (user: AuthUser) => void;
   setLoading: (loading: boolean) => void;
   initialize: () => Promise<void>;
+  setHydrated: () => void;
 }
 
 // ─── Store ────────────────────────────────────────────────────────────────────
@@ -31,6 +32,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       loading: false,
       token: null,
       refreshToken: null,
+      _hydrated: false,
 
       // ── Actions ────────────────────────────────────────────────────────────
 
@@ -121,6 +123,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
 
       setUser: (user) => set({ user, role: user.role }),
       setLoading: (loading) => set({ loading }),
+      setHydrated: () => set({ _hydrated: true }),
 
       initialize: async () => {
         set({ loading: true });
@@ -148,6 +151,9 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         token: state.token,
         refreshToken: state.refreshToken,
       }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHydrated();
+      },
     }
   )
 );

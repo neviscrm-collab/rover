@@ -510,11 +510,12 @@ export default function ExperiencePage({
 
       {/* ── Sticky Booking Bar ─────────────────────────────────────── */}
       <div
-        className="fixed bottom-20 left-0 right-0 z-40 px-4 lg:bottom-0 lg:border-t"
+        className="fixed bottom-20 left-0 right-0 z-40 px-4 lg:bottom-0 lg:border-t lg:px-0"
         style={{ borderColor: "rgba(255,255,255,0.06)" }}
       >
+        <div className="lg:max-w-3xl lg:mx-auto">
         <div
-          className="glass-dark rounded-2xl px-5 py-4 flex items-center justify-between"
+          className="glass-dark rounded-2xl px-5 py-4 flex items-center justify-between lg:rounded-none lg:border-0 lg:bg-transparent lg:backdrop-blur-none lg:py-3"
           style={{ boxShadow: "0 -10px 40px rgba(0,0,0,0.5)" }}
         >
           <div>
@@ -543,6 +544,7 @@ export default function ExperiencePage({
           >
             Book Now
           </motion.button>
+        </div>
         </div>
       </div>
     </div>

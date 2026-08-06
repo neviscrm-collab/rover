@@ -91,4 +91,5 @@ export interface AuthState {
   loading: boolean;
   token: string | null;
   refreshToken: string | null;
+  _hydrated: boolean;
 }

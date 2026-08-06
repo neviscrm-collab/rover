@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import type { Traveler } from "@/lib/types";
 
 interface TravelerStackProps {
@@ -38,11 +37,10 @@ export default function TravelerStack({
             style={{ zIndex: max - idx }}
             title={traveler.name}
           >
-            <Image
+            <img
               src={traveler.avatar}
               alt={traveler.name}
-              width={dim}
-              height={dim}
+              style={{width: dim, height: dim}}
               className="object-cover w-full h-full"
             />
           </div>

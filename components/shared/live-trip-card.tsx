@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { MapPin, CalendarBlank, Ticket } from "@phosphor-icons/react";
@@ -33,12 +32,10 @@ export default function LiveTripCard({ trip, index = 0 }: LiveTripCardProps) {
         >
           {/* Top image strip */}
           <div className="relative h-28 overflow-hidden">
-            <Image
+            <img
               src={trip.experience.heroImage}
               alt={trip.experience.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="600px"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 img-overlay-bottom" />
 

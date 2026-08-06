@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "@phosphor-icons/react";
@@ -32,12 +31,10 @@ export default function DestinationCard({
         style={{ boxShadow: "var(--shadow-glass)" }}
       >
         <div className={`relative ${heightClass}`}>
-          <Image
+          <img
             src={destination.image}
             alt={destination.name}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-            sizes="160px"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 img-overlay-bottom" />
 

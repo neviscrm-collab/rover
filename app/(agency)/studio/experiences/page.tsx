@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, MagnifyingGlass, DotsThree, MapPin, Star, Eye, PencilSimple, Trash } from "@phosphor-icons/react";
 import { EXPERIENCES } from "@/lib/mock-data";
@@ -78,7 +77,7 @@ export default function ExperiencesPage() {
             style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
           >
             <div className="relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
-              <Image src={exp.img} alt={exp.title} fill className="object-cover" sizes="80px" />
+              <img src={exp.img} alt={exp.title} className="absolute inset-0 w-full h-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-2">

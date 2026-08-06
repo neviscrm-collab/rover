@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -49,12 +48,10 @@ export default function ProfilePage() {
       {/* Cover + Avatar */}
       <div className="relative">
         <div className="relative h-52 overflow-hidden">
-          <Image
+          <img
             src={CURRENT_USER.coverImage}
             alt="Cover"
-            fill
-            className="object-cover"
-            sizes="100vw"
+            className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 img-overlay-bottom" />
         </div>
@@ -82,12 +79,10 @@ export default function ProfilePage() {
         {/* Avatar */}
         <div className="absolute -bottom-12 left-4">
           <div className="relative w-24 h-24 rounded-3xl overflow-hidden ring-4 ring-black">
-            <Image
+            <img
               src={CURRENT_USER.avatar}
               alt={CURRENT_USER.name}
-              fill
-              className="object-cover"
-              sizes="96px"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
         </div>
@@ -285,7 +280,7 @@ export default function ProfilePage() {
               >
                 <div className="flex items-start gap-3 mb-3">
                   <div className="relative w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
-                    <Image src={r.img} alt={r.trip} fill className="object-cover" sizes="40px" />
+                    <img src={r.img} alt={r.trip} className="absolute inset-0 w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-white truncate">{r.trip}</p>

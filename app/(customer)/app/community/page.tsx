@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Heart,
@@ -80,12 +79,10 @@ export default function CommunityPage() {
             }}
           >
             <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
-              <Image
+              <img
                 src={TRAVELERS[0].avatar}
                 alt="You"
-                fill
-                className="object-cover"
-                sizes="36px"
+                className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
             <div className="flex-1">
@@ -117,12 +114,10 @@ export default function CommunityPage() {
               {/* Author */}
               <div className="flex items-center gap-3 p-4 pb-3">
                 <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
-                  <Image
+                  <img
                     src={post.author.avatar}
                     alt={post.author.name}
-                    fill
-                    className="object-cover"
-                    sizes="36px"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
                 <div className="flex-1">
@@ -156,12 +151,10 @@ export default function CommunityPage() {
                 >
                   {post.images.map((img, i) => (
                     <div key={i} className="relative aspect-video">
-                      <Image
+                      <img
                         src={img}
                         alt="Post"
-                        fill
-                        className="object-cover"
-                        sizes="600px"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                     </div>
                   ))}
@@ -227,12 +220,10 @@ export default function CommunityPage() {
               }}
             >
               <div className="relative w-14 h-14 rounded-xl overflow-hidden flex-shrink-0">
-                <Image
+                <img
                   src={comm.dest.image}
                   alt={comm.dest.name}
-                  fill
-                  className="object-cover"
-                  sizes="56px"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
               <div className="flex-1">
@@ -286,12 +277,10 @@ export default function CommunityPage() {
                 }}
               >
                 <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                  <Image
+                  <img
                     src={traveler.avatar}
                     alt={traveler.name}
-                    fill
-                    className="object-cover"
-                    sizes="48px"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
                 <div className="flex-1">

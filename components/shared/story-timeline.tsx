@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Coffee, Bed, Mountains, Waves } from "@phosphor-icons/react";
 import type { ItineraryDay } from "@/lib/types";
@@ -75,12 +74,10 @@ export default function StoryTimeline({ itinerary }: StoryTimelineProps) {
             {/* Image */}
             {day.image && (
               <div className="relative h-36 rounded-xl overflow-hidden mb-3">
-                <Image
+                <img
                   src={day.image}
                   alt={day.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 600px"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
             )}

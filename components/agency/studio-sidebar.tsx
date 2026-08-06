@@ -17,7 +17,6 @@ import {
 } from "@phosphor-icons/react";
 import { useAuthStore } from "@/store/auth.store";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 const NAV_ITEMS = [
   { href: "/studio", label: "Overview", icon: SquaresFour, exact: true },
@@ -109,7 +108,7 @@ export default function StudioSidebar() {
           <div className="flex items-center gap-3 px-3 py-2.5">
             <div className="w-8 h-8 rounded-xl overflow-hidden flex-shrink-0 bg-white/10">
               {user?.avatar && (
-                <Image src={user.avatar} alt={user.name} width={32} height={32} className="object-cover" />
+                <img src={user.avatar} alt={user.name} style={{width: 32, height: 32}} className="object-cover" />
               )}
             </div>
             <div className="flex-1 min-w-0">

@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Sparkle, Lightning, Users, EnvelopeSimple, Lock, Eye, EyeSlash, Backpack, Buildings, GoogleLogo, WarningCircle } from "@phosphor-icons/react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/auth.store";
 import { UserRole } from "@/lib/types/auth.types";
@@ -371,12 +370,10 @@ export default function HomePage() {
                     style={{ border: "1px solid rgba(255,255,255,0.06)" }}
                   >
                     <div className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
-                      <Image
+                      <img
                         src={exp.heroImage}
                         alt={exp.title}
-                        fill
-                        className="object-cover"
-                        sizes="64px"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -479,12 +476,10 @@ export default function HomePage() {
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="relative w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                    <Image
+                    <img
                       src={post.author.avatar}
                       alt={post.author.name}
-                      fill
-                      className="object-cover"
-                      sizes="32px"
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                   </div>
                   <div>
@@ -502,12 +497,10 @@ export default function HomePage() {
                 </p>
                 {post.images.length > 0 && (
                   <div className="relative h-40 rounded-xl overflow-hidden mt-3">
-                    <Image
+                    <img
                       src={post.images[0]}
                       alt="Post image"
-                      fill
-                      className="object-cover"
-                      sizes="600px"
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                   </div>
                 )}

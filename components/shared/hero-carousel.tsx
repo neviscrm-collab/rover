@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, MapPin, Star, Clock } from "@phosphor-icons/react";
@@ -52,13 +51,10 @@ export default function HeroCarousel({
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="absolute inset-0"
         >
-          <Image
+          <img
             src={exp.heroImage}
             alt={exp.title}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
+            className="absolute inset-0 w-full h-full object-cover"
           />
           {/* Gradient overlays */}
           <div className="absolute inset-0 img-overlay-bottom" />

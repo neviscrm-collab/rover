@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { useAuthStore } from "@/store/auth.store";
 import { MagnifyingGlass, Bell, MapPin, Star, ArrowRight, Heart } from "@phosphor-icons/react";
 import { EXPERIENCES, CURRENT_USER } from "@/lib/mock-data";
@@ -74,13 +73,10 @@ export default function CustomerHomePage() {
               className="relative overflow-hidden rounded-3xl"
               style={{ height: 210 }}
             >
-              <Image
+              <img
                 src={hero.heroImage}
                 alt={hero.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 600px"
-                priority
+                className="absolute inset-0 w-full h-full object-cover"
               />
               <div
                 className="absolute inset-0"
@@ -157,12 +153,10 @@ export default function CustomerHomePage() {
             >
               <div className="relative flex-shrink-0">
                 <div className="relative w-16 h-16 rounded-xl overflow-hidden">
-                  <Image
+                  <img
                     src={exp.heroImage}
                     alt={exp.title}
-                    fill
-                    className="object-cover"
-                    sizes="64px"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
                 <button

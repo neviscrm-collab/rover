@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { MapPin, Star, Clock, Heart } from "@phosphor-icons/react";
@@ -46,12 +45,10 @@ export default function ExperienceCard({
         <div className="relative overflow-hidden rounded-2xl" style={{ boxShadow: "var(--shadow-glass)" }}>
           {/* Image */}
           <div className={`relative ${imageHeight[variant]} overflow-hidden`}>
-            <Image
+            <img
               src={experience.heroImage}
               alt={experience.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 768px) 280px, 320px"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 img-overlay-bottom" />
 

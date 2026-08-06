@@ -14,7 +14,6 @@ import LiveTripCard from "@/components/shared/live-trip-card";
 import EmptyState from "@/components/shared/empty-state";
 import { MY_TRIPS } from "@/lib/mock-data";
 import { formatDate } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
 
 const TABS = [

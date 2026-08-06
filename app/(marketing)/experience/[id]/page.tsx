@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
@@ -84,13 +83,10 @@ export default function ExperiencePage({
           style={{ scale: heroScale, opacity: heroOpacity }}
           className="absolute inset-0"
         >
-          <Image
+          <img
             src={experience.heroImage}
             alt={experience.title}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </motion.div>
         <div className="absolute inset-0 img-overlay-bottom" />
@@ -236,12 +232,10 @@ export default function ExperiencePage({
           <div>
             <h2 className="text-base font-bold text-white mb-3">Gallery</h2>
             <div className="relative aspect-video rounded-2xl overflow-hidden mb-2">
-              <Image
+              <img
                 src={experience.gallery[selectedGalleryIdx]}
                 alt="Gallery"
-                fill
-                className="object-cover transition-all duration-500"
-                sizes="(max-width: 768px) 100vw, 700px"
+                className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
               />
             </div>
             <div className="flex gap-2 overflow-x-auto scrollbar-hide">
@@ -257,12 +251,10 @@ export default function ExperiencePage({
                         : "2px solid transparent",
                   }}
                 >
-                  <Image
+                  <img
                     src={img}
                     alt={`Gallery ${idx}`}
-                    fill
-                    className="object-cover"
-                    sizes="64px"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 </button>
               ))}
@@ -355,12 +347,10 @@ export default function ExperiencePage({
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <div className="relative w-8 h-8 rounded-full overflow-hidden">
-                      <Image
+                      <img
                         src={review.author.avatar}
                         alt={review.author.name}
-                        fill
-                        className="object-cover"
-                        sizes="32px"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                     </div>
                     <div className="flex-1">
@@ -397,12 +387,10 @@ export default function ExperiencePage({
                           key={idx}
                           className="relative w-20 h-20 rounded-xl overflow-hidden"
                         >
-                          <Image
+                          <img
                             src={img}
                             alt="Review"
-                            fill
-                            className="object-cover"
-                            sizes="80px"
+                            className="absolute inset-0 w-full h-full object-cover"
                           />
                         </div>
                       ))}
@@ -475,12 +463,10 @@ export default function ExperiencePage({
           </p>
           <div className="flex items-center gap-3">
             <div className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
-              <Image
+              <img
                 src={experience.agency.logo}
                 alt={experience.agency.name}
-                fill
-                className="object-cover"
-                sizes="48px"
+                className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
             <div>

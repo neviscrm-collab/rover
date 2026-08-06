@@ -6,8 +6,10 @@
  *   • Client Secret — traditional server-side flow when secret is present
  */
 
-const ZOHO_BASE = "https://accounts.zoho.in/oauth/v2";
-const ZOHO_API  = "https://www.zohoapis.in/crm/v2";
+// api-console.zoho.in registers clients in the global (US DC) registry.
+// Auth must go through accounts.zoho.com regardless of CRM DC.
+const ZOHO_BASE = "https://accounts.zoho.com/oauth/v2";
+const ZOHO_API  = "https://www.zohoapis.in/crm/v2"; // CRM data stays on India DC
 
 export const ZOHO_SCOPE = "ZohoCRM.users.READ";
 

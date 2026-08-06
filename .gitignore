@@ -40,3 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 !.env.example
+
+# AI / editor workspace files (auto-generated, not part of the app)
+CLAUDE.md
+AGENTS.md
+.claude/

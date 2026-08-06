@@ -1,20 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { EnvelopeSimple, Lock, Eye, EyeSlash, GoogleLogo, ArrowLeft, WarningCircle } from "@phosphor-icons/react";
 import { useAuthStore } from "@/store/auth.store";
 import { UserRole } from "@/lib/types/auth.types";
 
-export default function LoginPage() {
+const ZOHO_AUTH_URL = `/api/auth/zoho/start`;
+
+function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [error, setError] = useState("");
   const { login, loginWithGoogle, loading } = useAuthStore();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const oauthError = searchParams.get("error");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,6 +75,33 @@ export default function LoginPage() {
         <p className="text-sm text-center mb-8" style={{ color: "var(--text-dim)" }}>
           Sign in to continue your journey
         </p>
+
+        {/* OAuth error from Zoho callback */}
+        {oauthError && (
+          <div className="flex items-center gap-2 p-3 rounded-xl mb-4" style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.2)" }}>
+            <WarningCircle size={16} className="text-red-400 flex-shrink-0" />
+            <p className="text-xs text-red-400">Zoho sign-in failed: {oauthError}</p>
+          </div>
+        )}
+
+        {/* Sign in with Zoho CRM */}
+        <motion.a
+          whileTap={{ scale: 0.97 }}
+          href={ZOHO_AUTH_URL}
+          className="w-full flex items-center justify-center gap-3 py-3 rounded-2xl mb-3 font-semibold text-sm transition-all"
+          style={{
+            background: "linear-gradient(135deg, #E84C3D, #C0392B)",
+            color: "#fff",
+            boxShadow: "0 4px 20px rgba(232,76,61,0.3)",
+          }}
+        >
+          {/* Zoho logo mark */}
+          <svg width="18" height="18" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="8" fill="white" fillOpacity="0.2"/>
+            <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fontSize="20" fontWeight="bold" fill="white">Z</text>
+          </svg>
+          Continue with Zoho CRM
+        </motion.a>
 
         {/* Google */}
         <motion.button
@@ -206,5 +238,14 @@ export default function LoginPage() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+// Wrap in Suspense because useSearchParams() requires it in Next.js 14
+export default function LoginPageWithSuspense() {
+  return (
+    <Suspense>
+      <LoginPage />
+    </Suspense>
   );
 }

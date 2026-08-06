@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   House,
@@ -11,8 +11,10 @@ import {
   UserCircle,
   NavigationArrow,
   Gear,
+  SignOut,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/store/auth.store";
 
 const NAV_ITEMS = [
   { href: "/", icon: House, label: "Home" },
@@ -24,6 +26,13 @@ const NAV_ITEMS = [
 
 export default function SideRail() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { isAuthenticated, logout } = useAuthStore();
+
+  const handleLogout = async () => {
+    await logout();
+    router.replace("/");
+  };
 
   return (
     <nav
@@ -103,7 +112,7 @@ export default function SideRail() {
       {/* Bottom */}
       <div className="flex flex-col items-center gap-2">
         <Link
-          href="/agency"
+          href="/studio"
           title="Agency Studio"
           className="group relative w-11 h-11 flex items-center justify-center rounded-xl hover:bg-white/5 transition-colors"
         >
@@ -114,6 +123,21 @@ export default function SideRail() {
             </div>
           </div>
         </Link>
+
+        {isAuthenticated && (
+          <button
+            onClick={handleLogout}
+            title="Sign out"
+            className="group relative w-11 h-11 flex items-center justify-center rounded-xl hover:bg-red-500/10 transition-colors"
+          >
+            <SignOut size={18} weight="regular" className="text-white/30 group-hover:text-red-400 transition-colors" />
+            <div className="pointer-events-none absolute left-14 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
+              <div className="glass px-3 py-1.5 rounded-lg whitespace-nowrap">
+                <span className="text-xs font-medium text-white">Sign out</span>
+              </div>
+            </div>
+          </button>
+        )}
       </div>
     </nav>
   );

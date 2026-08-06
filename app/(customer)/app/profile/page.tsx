@@ -245,12 +245,61 @@ export default function ProfilePage() {
 
         {/* Reviews */}
         {activeTab === "reviews" && (
-          <div className="text-center py-10">
-            <Star size={32} className="text-white/20 mx-auto mb-3" />
-            <p className="text-sm text-white/40">No reviews yet</p>
-            <p className="text-xs text-white/25 mt-1">
-              Complete a trip to leave your first review
-            </p>
+          <div className="space-y-4">
+            {[
+              {
+                id: "r1",
+                trip: "Bali Surf & Soul",
+                agency: "WanderLust Experiences",
+                rating: 5,
+                date: "Aug 2025",
+                img: "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=80&q=70",
+                review: "Honestly one of the best decisions of my life. The surf instructors were incredible, the villa was immaculate, and the whole vibe felt curated just for us. ROVER found this gem.",
+              },
+              {
+                id: "r2",
+                trip: "Tokyo Anime & Culture",
+                agency: "Summit Seekers",
+                rating: 5,
+                date: "Mar 2025",
+                img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=80&q=70",
+                review: "7 days wasn't enough. The itinerary struck the perfect balance between tourist spots and local hidden gems. The Akihabara deep-dive was surreal. Already planning a return.",
+              },
+              {
+                id: "r3",
+                trip: "Spiti Valley Road Trip",
+                agency: "WanderLust Experiences",
+                rating: 4,
+                date: "Sep 2024",
+                img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=80&q=70",
+                review: "Roads are brutal but the landscapes make it 100% worth it. Chandratal at sunrise was an out-of-body experience. Lost a star only because Day 3 accommodation could be better.",
+              },
+            ].map((r, i) => (
+              <motion.div
+                key={r.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.07 }}
+                className="rounded-2xl p-4"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}
+              >
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="relative w-10 h-10 rounded-xl overflow-hidden flex-shrink-0">
+                    <Image src={r.img} alt={r.trip} fill className="object-cover" sizes="40px" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white truncate">{r.trip}</p>
+                    <p className="text-[11px] text-white/45">{r.agency} · {r.date}</p>
+                  </div>
+                  <div className="flex gap-0.5 flex-shrink-0">
+                    {Array.from({ length: 5 }).map((_, si) => (
+                      <Star key={si} size={12} weight={si < r.rating ? "fill" : "regular"} className={si < r.rating ? "text-amber-400" : "text-white/20"} />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-xs text-white/65 leading-relaxed">{r.review}</p>
+              </motion.div>
+            ))}
           </div>
         )}
 

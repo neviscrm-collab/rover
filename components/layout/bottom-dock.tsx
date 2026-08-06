@@ -13,11 +13,11 @@ import {
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { href: "/", icon: House, label: "Home" },
+  { href: "/app", icon: House, label: "Home" },
   { href: "/discover", icon: Compass, label: "Discover" },
-  { href: "/trips", icon: Suitcase, label: "Trips" },
-  { href: "/community", icon: Users, label: "Community" },
-  { href: "/profile", icon: UserCircle, label: "Profile" },
+  { href: "/app/trips", icon: Suitcase, label: "Trips" },
+  { href: "/app/community", icon: Users, label: "Community" },
+  { href: "/app/profile", icon: UserCircle, label: "Profile" },
 ];
 
 export default function BottomDock() {
@@ -32,8 +32,8 @@ export default function BottomDock() {
         <div className="flex items-center justify-around px-2 py-3">
           {NAV_ITEMS.map((item) => {
             const isActive =
-              item.href === "/"
-                ? pathname === "/"
+              item.href === "/app"
+                ? pathname === "/app"
                 : pathname.startsWith(item.href);
             const Icon = item.icon;
 

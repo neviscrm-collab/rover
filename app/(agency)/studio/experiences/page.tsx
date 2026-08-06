@@ -1,14 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, MagnifyingGlass, DotsThree, MapPin, Star, Eye, PencilSimple, Trash } from "@phosphor-icons/react";
+import { EXPERIENCES } from "@/lib/mock-data";
 
-const MOCK_EXPERIENCES = [
-  { id: "exp_001", title: "Ladakh Road Trip", location: "Jammu & Kashmir", duration: "7 days", price: 45000, rating: 4.9, bookings: 12, status: "published", img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=70" },
-  { id: "exp_002", title: "Kerala Backwaters", location: "Kerala", duration: "5 days", price: 28000, rating: 4.8, bookings: 8, status: "published", img: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=400&q=70" },
-  { id: "exp_003", title: "Rajasthan Heritage", location: "Rajasthan", duration: "6 days", price: 35000, rating: 4.7, bookings: 5, status: "draft", img: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&q=70" },
-];
+const MOCK_EXPERIENCES = EXPERIENCES.slice(0, 3).map((e, i) => ({
+  id: e.id,
+  title: e.title,
+  location: `${e.destination.name}, ${e.destination.country}`,
+  duration: e.duration,
+  price: e.price,
+  rating: e.rating,
+  bookings: [12, 8, 5][i],
+  status: i < 2 ? "published" : "draft",
+  img: e.heroImage,
+}));
 
 const statusColors: Record<string, { bg: string; text: string }> = {
   published: { bg: "rgba(16,185,129,0.15)", text: "#10B981" },
@@ -69,7 +77,9 @@ export default function ExperiencesPage() {
             className="flex gap-3 p-3 rounded-2xl relative"
             style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
           >
-            <img src={exp.img} alt={exp.title} className="w-20 h-20 rounded-xl object-cover flex-shrink-0" />
+            <div className="relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+              <Image src={exp.img} alt={exp.title} fill className="object-cover" sizes="80px" />
+            </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-2">
                 <div>

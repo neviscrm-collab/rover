@@ -177,7 +177,7 @@ export default function LoginPage() {
               🧪 Demo accounts — tap to fill
             </span>
           </div>
-          <div className="divide-y" style={{ divideColor: "rgba(255,255,255,0.05)" }}>
+          <div className="divide-y divide-white/5">
             {[
               { label: "Traveler", emoji: "🎒", email: "arjun@example.com", password: "password123" },
               { label: "Agency", emoji: "🏢", email: "hello@wanderlust.com", password: "agency123" },

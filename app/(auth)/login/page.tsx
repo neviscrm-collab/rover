@@ -8,16 +8,17 @@ import { motion } from "framer-motion";
 import { EnvelopeSimple, Lock, Eye, EyeSlash, GoogleLogo, ArrowLeft, WarningCircle } from "@phosphor-icons/react";
 import { useAuthStore } from "@/store/auth.store";
 import { UserRole } from "@/lib/types/auth.types";
+import { ZOHO_SCOPE } from "@/lib/zoho-oauth";
 
-// Built client-side from NEXT_PUBLIC vars — no server route needed for static export
+// Built client-side from NEXT_PUBLIC vars — no server route needed
 const ZOHO_AUTH_URL = (() => {
-  const clientId   = process.env.NEXT_PUBLIC_ZOHO_CLIENT_ID;
+  const clientId    = process.env.NEXT_PUBLIC_ZOHO_CLIENT_ID;
   const redirectUri = process.env.NEXT_PUBLIC_ZOHO_REDIRECT_URI;
   if (!clientId || !redirectUri) return "#";
   const p = new URLSearchParams({
     response_type: "token",
     client_id:     clientId,
-    scope:         "ZohoCRM.users.READ",
+    scope:         ZOHO_SCOPE,          // ZohoCRM.users.READ + modules.ALL + settings.ALL
     redirect_uri:  redirectUri,
   });
   return `https://accounts.zoho.in/oauth/v2/auth?${p.toString()}`;

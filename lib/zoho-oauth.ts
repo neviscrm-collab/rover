@@ -7,7 +7,11 @@
 const ZOHO_BASE = "https://accounts.zoho.in/oauth/v2";
 const ZOHO_API  = "https://www.zohoapis.in/crm/v2";
 
-export const ZOHO_SCOPE = "ZohoCRM.users.READ";
+// Full scope required for ROVER:
+//   ZohoCRM.users.READ       — fetch logged-in user profile
+//   ZohoCRM.modules.ALL      — CRUD on CRM module records (leads, contacts, bookings, experiences)
+//   ZohoCRM.settings.ALL     — create custom modules, fields, and workflow rules
+export const ZOHO_SCOPE = "ZohoCRM.users.READ ZohoCRM.modules.ALL ZohoCRM.settings.ALL";
 
 /** Token lifetime Zoho grants (seconds). Store locally for auto-logout. */
 export const ZOHO_TOKEN_TTL_SECONDS = 3600; // 1 hour

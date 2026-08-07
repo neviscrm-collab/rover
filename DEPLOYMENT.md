@@ -1,97 +1,71 @@
 # ROVER — Zoho Catalyst Slate Deployment Guide
 
-ROVER is configured as a **fully-static Next.js export** (`output: 'export'`).  
-Every page is pre-rendered to HTML at build time — no Node server required.  
-Zoho Catalyst Slate serves these static files directly from its CDN.
+Catalyst Slate for Next.js uses **`@zcatalyst/nextjs-plugin`** (OpenNext under the hood)
+to wrap your Next.js app as serverless functions — it is NOT a raw static CDN.
+The plugin runs `next build` and then packages everything for Catalyst's serverless runtime.
 
 ---
 
-## One-command deploy prep
+## How Catalyst Slate deploys this app
+
+```
+Git push → Slate CI →  npm install
+                     → next build          ← standard build, NO output:'export'
+                     → npx zcatalyst-nextjs ← wraps .next/ into serverless functions
+                     → Deploy to CDN + Functions
+```
+
+The critical rule: **never add `output: 'export'`** to `next.config.mjs`.  
+OpenNext looks for `.next/standalone/` which static export never creates.
+
+---
+
+## GitHub-connected auto-deploy (current setup)
+
+The repo `neviscrm-collab/rover` is connected to Catalyst Slate (Project-Rainfall).  
+Every push to `main` triggers a new build automatically — no manual upload needed.
 
 ```bash
-npm run deploy:zip
+git push origin main   # triggers Catalyst Slate build pipeline
 ```
 
-This runs `next build`, collects the `out/` directory, and produces  
-**`rover-slate-deploy.zip`** in the project root — ready to upload to Slate.
+Watch progress in: **Catalyst Console → Slate → Deployments**
 
 ---
 
-## Step-by-step Catalyst Slate upload
+## Known ESLint issue (already fixed)
 
-1. **Log in** to [Zoho Catalyst Console](https://catalyst.zoho.com) and open your project.
-2. Navigate to **Hosting → Slate Sites**.
-3. Click **Create Site** (or open your existing ROVER site).
-4. Under **Deploy**, choose **Upload ZIP**.
-5. Select `rover-slate-deploy.zip` from your project root.
-6. Click **Deploy** — Slate unpacks the ZIP and distributes via CDN.
-7. Your site is live at the Slate-assigned domain (e.g. `rover.zohocatalyst.com`).
-
-### Custom domain (optional)
-
-In the Slate site settings → **Custom Domain**, add your domain (e.g. `rover.app`)  
-and follow the CNAME/A-record instructions Catalyst provides.
-
----
-
-## What's inside the ZIP
+Catalyst Slate's build environment exposes an ESLint 8/9 API conflict:
 
 ```
-out/
-├── index.html                   ← Marketing home (/)
-├── discover/index.html          ← Discover page
-├── experience/
-│   ├── exp-spiti/index.html     ┐
-│   ├── exp-bali-surf/index.html │  8 pre-rendered experience pages
-│   ├── exp-japan-anime/…        ┘
-│   └── …
-├── app/                         ← Customer app (auth-guarded client-side)
-├── studio/                      ← Agency Studio (auth-guarded client-side)
-├── login/ register/ …           ← Auth pages
-└── _next/                       ← JS/CSS chunks + static assets
+ESLint: Invalid Options: Unknown options: useEslintrc, extensions
 ```
 
----
+**Fix applied** in `next.config.mjs`:
 
-## Why it works with Catalyst Slate
+```js
+eslint: { ignoreDuringBuilds: true }
+```
 
-| Feature | How it's handled |
-|---|---|
-| Static HTML | `output: 'export'` in `next.config.mjs` |
-| Trailing slashes | `trailingSlash: true` → `/experience/exp-bali/index.html` |
-| Dynamic routes | `generateStaticParams()` pre-renders all 8 experience pages |
-| Images | `images: { unoptimized: true }` — served directly from Unsplash CDN |
-| Auth | Client-side Zustand store with `localStorage` persistence — no server needed |
-| PWA | `public/manifest.json` bundled into `out/` |
-| Deep links | Slate must serve `index.html` for unknown paths — enable **SPA fallback** in Slate settings |
-
-### ⚠️ Enable SPA Fallback in Slate
-
-Since ROVER uses client-side routing (Next.js App Router), Catalyst Slate needs  
-to serve `index.html` for any path it doesn't find — otherwise direct URL visits  
-to `/discover` or `/experience/exp-spiti` will 404.
-
-In Slate Site settings → **Error Page** → set the 404 document to `index.html`.
+This skips ESLint during `next build` on Catalyst CI.  
+Run `npm run lint` locally to lint before pushing.
 
 ---
 
 ## Local development
 
 ```bash
-npm run dev          # Hot-reload dev server on http://localhost:3000
-npm run build        # Production build → out/
-npm run deploy:zip   # Build + package for Slate upload
+npm run dev      # dev server → http://localhost:3000
+npm run build    # verify the build matches what Slate will run
+npm run lint     # lint check (not run during Slate CI build)
 ```
 
 ---
 
 ## Environment variables
 
-No server-side env vars are needed — ROVER uses only mock data and client-side auth.  
-If you connect a real backend later, prefix vars with `NEXT_PUBLIC_` so they're  
-inlined at build time (required for static export).
+For server-side env vars (API keys, secrets), add them in:  
+**Catalyst Console → Slate → Site Settings → Environment Variables**
 
-```env
-# .env.local — add only NEXT_PUBLIC_ vars
-NEXT_PUBLIC_API_URL=https://your-api.com
-```
+Client-side vars must be prefixed `NEXT_PUBLIC_` and set in `.env.local`  
+(and mirrored in Catalyst env vars so the build can access them).

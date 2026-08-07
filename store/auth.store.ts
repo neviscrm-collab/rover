@@ -123,7 +123,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         }
       },
 
-      setUser: (user) => set({ user, role: user.role }),
+      setUser: (user) => set({ user, role: user.role, isAuthenticated: true }),
       setLoading: (loading) => set({ loading }),
       setHydrated: () => set({ _hydrated: true }),
 

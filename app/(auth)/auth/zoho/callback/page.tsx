@@ -60,7 +60,8 @@ export default function ZohoCallbackPage() {
           avatar:
             zohoUser.profile?.image_link ??
             `https://ui-avatars.com/api/?name=${encodeURIComponent(zohoUser.full_name)}&background=7C3AED&color=fff`,
-          role:              "CUSTOMER",
+          // Zoho CRM is a business tool — all OAuth logins are agency/admin users
+          role:              "AGENCY",
           profileCompletion: 60,
           createdAt:         new Date().toISOString(),
         };

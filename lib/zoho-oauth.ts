@@ -17,9 +17,9 @@ export const ZOHO_TOKEN_TTL_SECONDS = 3600; // 1 hour
 export function getZohoAuthUrl(): string {
   const params = new URLSearchParams({
     response_type: "token",                           // implicit — token in fragment
-    client_id:     process.env.ZOHO_CLIENT_ID!,
+    client_id:     process.env.NEXT_PUBLIC_ZOHO_CLIENT_ID!,
     scope:         ZOHO_SCOPE,
-    redirect_uri:  process.env.ZOHO_REDIRECT_URI!,
+    redirect_uri:  process.env.NEXT_PUBLIC_ZOHO_REDIRECT_URI!,
   });
   return `${ZOHO_BASE}/auth?${params.toString()}`;
 }

@@ -19,8 +19,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/auth.store";
 
-const ZOHO_API = "https://www.zohoapis.in/crm/v2";
-
 export default function ZohoCallbackPage() {
   const router = useRouter();
   const { setUser } = useAuthStore();
@@ -42,10 +40,13 @@ export default function ZohoCallbackPage() {
 
         if (!accessToken) throw new Error("No access token received from Zoho");
 
-        // ── 2. Fetch Zoho CRM user directly from the browser ─────────────────
+        // ── 2. Fetch Zoho CRM user via server-side proxy (avoids CORS) ──────────
+        // Direct browser → zohoapis.in calls are blocked unless the domain is
+        // registered as a JavaScript Domain in Zoho API Console.
+        // /api/zoho/user proxies the request server-side — no CORS issues.
         setStatus("Fetching your profile…");
-        const res = await fetch(`${ZOHO_API}/users?type=CurrentUser`, {
-          headers: { Authorization: `Zoho-oauthtoken ${accessToken}` },
+        const res = await fetch(`/api/zoho/user`, {
+          headers: { "x-zoho-token": accessToken },
         });
         if (!res.ok) throw new Error(`Zoho API error: ${res.status}`);
         const data = await res.json();

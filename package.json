@@ -6,16 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "export": "next build",
+    "deploy:zip": "next build && cd out && zip -r ../rover-slate-deploy.zip . && cd .. && echo '✅ rover-slate-deploy.zip ready — upload to Catalyst Slate'"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
     "@tanstack/react-query": "^5.101.4",
     "clsx": "^2.1.1",
     "framer-motion": "^11.18.2",
-    "next": "14.2.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "^15.5.23",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-hook-form": "^7.84.0",
     "tailwind-merge": "^2.6.0",
     "zod": "^3.25.76",
@@ -24,10 +26,10 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "eslint": "^8",
-    "eslint-config-next": "14.2.5",
+    "eslint-config-next": "^15.5.23",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

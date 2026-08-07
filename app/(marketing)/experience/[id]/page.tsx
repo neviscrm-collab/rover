@@ -1,5 +1,5 @@
-// Server component — exports generateStaticParams for static export,
-// then renders the client component with the experience ID.
+// Server component — exports generateStaticParams for Catalyst Slate static export,
+// then resolves the params Promise (Next.js 15) and renders the client page.
 import { EXPERIENCES } from "@/lib/mock-data";
 import ExperiencePageClient from "./experience-client";
 
@@ -7,10 +7,11 @@ export function generateStaticParams() {
   return EXPERIENCES.map((exp) => ({ id: exp.id }));
 }
 
-export default function ExperiencePage({
+export default async function ExperiencePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  return <ExperiencePageClient params={params} />;
+  const { id } = await params;
+  return <ExperiencePageClient id={id} />;
 }

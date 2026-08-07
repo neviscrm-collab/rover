@@ -31,17 +31,11 @@ import {
   cn,
 } from "@/lib/utils";
 
-// Required for static export — pre-renders a page for every experience ID
-export function generateStaticParams() {
-  return EXPERIENCES.map((exp) => ({ id: exp.id }));
-}
-
 export default function ExperiencePageClient({
-  params,
+  id,
 }: {
-  params: { id: string };
+  id: string;
 }) {
-  const { id } = params;
   const experience = EXPERIENCES.find((e) => e.id === id);
 
   const { toggleWishlist, isWishlisted, setSelectedExperience, setBookingOpen } =
